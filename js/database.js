@@ -38,24 +38,6 @@ function Database(){
         mv:"",
     }
     self.exportSongs=function(callback){
-        // var SQL=""
-        // var tables=["playlists","songlist"]
-        // for(var i in tables){
-        //     var tableName=tables[i]
-        //     executeSql("SELECT * FROM "+tableName,null,function(results) {
-        //         for (var i=0;i<results.rows.length;i++) {
-        //             var row=results.rows.item(i);
-        //             var fields=[];
-        //             var values=[];
-        //             for (col in row) {
-        //                 fields.push(col);
-        //                 values.push('"'+row[col]+'"');
-        //             }
-        //             SQL+="INSERT INTO "+tableName+"("+fields.join(",")+") VALUES ("+values.join(",")+");\n";
-        //         }
-        //         callback(SQL)
-        //     });
-        // }
         var sqlStatement="SELECT * FROM songlist"
         executeSql(sqlStatement, null,
             function(result){

@@ -1,19 +1,3 @@
-/*
-http://www.douban.com/note/158621500/				--Audio
-http://xsky.sinaapp.com/2012/01/qq-music-api.html --API
-http://mezzoblue.github.com/PaintbrushJS/demo/    --Color
-http://updates.html5rocks.com/2012/02/HTML5-audio-and-the-Web-Audio-API-are-BFFs
-http://css.dzone.com/articles/exploring-html5-web-audio
-http://chromium.googlecode.com/svn/trunk/samples/audio/index.html
-http://www.html5audio.org/2012/10/interactive-navigable-audio-visualization-using-webaudio-api-and-canvas.html
-http://techslides.com/html5-web-audio-api-demos-and-libraries/
-http://www.behance.net/gallery/Floating-3D-sound-visualization/4384841
-http://stackoverflow.com/questions/13122965/audio-api-fail-to-resume-music-and-also-visualize-it-is-there-bug-in-html5-aud
-http://www.html5china.com/HTML5features/video/20120206_3425.html --fullscreen
-*/
-//获取图片色调 桌面化 专辑光效 processing.js 最小化 播放列表
-//bug:volume setting doesn't work with soundVisual
-
 option=Option({
     titleType:{
         name:"Title Type",
@@ -68,11 +52,6 @@ option=Option({
         type:"cookie",
         value:false,
     },
-    soundVisual:{
-        name:"Sound Visual",
-        type:"checkbox",
-        value:false,
-    },
     video:{
         name:"Video",
         type:"checkbox",
@@ -94,22 +73,14 @@ option=Option({
         type:"cookie",
         value:"",
     },
-    X:{
+    playBoxTop:{
         type:"cookie",
-        value:0,
+        value:450,
     },
-    Y:{
-        type:"cookie",
-        value:0,
-    },
-    W:{
-        type:"cookie",
-        value:0,
-    },
-    H:{
-        type:"cookie",
-        value:0,
-    },
+    X:{type:"cookie",value:0,},
+    Y:{type:"cookie",value:0,},
+    W:{type:"cookie",value:0,},
+    H:{type:"cookie",value:0,},
 })
 
 windowState=document.title=="pop"?true:false
@@ -196,19 +167,13 @@ debug(1,{W:200,H:300},function(){
 		wrap.append(
 			messageBox,
 			option,
-			gallery,
+			gallery.append(
+                media
+            ),
 			playBox,
 			bottomTab
 		)
 	)
-    if(option.get("soundVisual")){
-        soundVisual=SoundVisual()
-        gallery.append(soundVisual)
-    }
-    if(option.get("video")){
-        video=Video()
-        gallery.append(video)
-    }
     if(option.get("shortCut")){
         shortCut=ShortCut()
     }
@@ -217,8 +182,9 @@ debug(1,{W:200,H:300},function(){
         wrap.addClass("maximum")
         lyricBox.setPos(0.1)
     }else{
-        bottomTab.css({height:wrap.height()-playBox.offsetTop})
-        gallery.resize(playBox.offsetTop+playBox.height(),playBox.offsetTop,true)
+        playBox.top(option.get("playBoxTop"))
+        bottomTab.css({height:"-webkit-calc(100% - "+playBox.top()+"px)"})
+        gallery.resize(playBox.top()+playBox.height(),playBox.top(),true)
     }
 
 })

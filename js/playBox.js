@@ -59,31 +59,29 @@ function PlayBox(){
 		},
 		move:function(){
 			gallery.resize(playBox.offsetTop+playBox.height(),playBox.offsetTop)
-			bottomTab.css({height:wrap.height()-this.dragInfo.pos.y})
+			bottomTab.css({height:"-webkit-calc(100% - "+this.dragInfo.pos.y+"px)"})
 			self.top(this.dragInfo.pos.y);
 			var scale=this.dragInfo.pos.y/495
-			if(scale<0.2){
-			}else if(scale>1){
-			}else{
+			if(this.dragInfo.pos.y!=0 && this.dragInfo.pos.y+this.height()!=wrap.height()){
 				wrap.removeClass("maximumBottom")
 				wrap.removeClass("maximumTop")
 			}
 		},
 		up:function(){
 			gallery.resize(playBox.offsetTop+playBox.height(),playBox.offsetTop,true)
-			bottomTab.css({height:wrap.height()-this.dragInfo.pos.y,opacity:1})
+			bottomTab.css({height:"-webkit-calc(100% - "+this.dragInfo.pos.y+"px)",opacity:1})
 			self.top(this.dragInfo.pos.y);
 			
-			var scale=this.dragInfo.pos.y/495
-			if(scale<0.2){
+			if(this.dragInfo.pos.y==0){
 				wrap.addClass("maximumBottom")
-			}else if(scale>1){
+			}else if(this.dragInfo.pos.y+this.height()==wrap.height()){
 				wrap.addClass("maximumTop")
 				playListBox.roll()
 				lyricBox.roll()
 			}else{
 				wrap.removeClass("maximumBottom")
 				wrap.removeClass("maximumTop")
+				option.set("playBoxTop",this.dragInfo.pos.y)
 			}
 		}
 	})

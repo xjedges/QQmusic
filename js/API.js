@@ -1,20 +1,3 @@
-// unsafeWindow.GM_getData=GM_getData
-// var http = new XMLHttpRequest();
-// function GM_getData(url,callback){
-//     http.onreadystatechange = function() {
-//         if (http.readyState == XMLHttpRequest.DONE) {
-//             if(http.status==200){
-//                 callback(http)
-//             }else{
-//                 callback(http)
-//             }
-//         }
-//     }
-//     http.open("GET", url)
-//     http.send()
-    
-// }
-
 GM_getData=function(){alert(1)}
 GM_getData1=function(){alert(2)}
 function API(){
@@ -140,7 +123,6 @@ function API(){
 		scriptNode=$("script",{src:src});
         head.append(scriptNode);
 	}
-
 	function convertRankDataFormat(data){
 		var newData={SongList:[]}
 		for(var i in data.songlist){

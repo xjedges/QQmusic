@@ -405,7 +405,6 @@ body#ipad .wrap {
 /*- playBox --------------------------------*/
 .playBox {
   position: absolute;
-  top: 450px;
   width: 100%;
   height: 6rem;
   z-index: 1001;
