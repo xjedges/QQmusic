@@ -5,6 +5,7 @@ function PlayBox(){
 	prevBtn=$("div",{cls:"prevBtn UI"})
 	modeBtn=ModeBtn();
 	volumeBtn=$("div",{cls:"volumeBtn UI"})
+	mediaModeBtn=$("div",{cls:"mediaModeBtn video"})
 	var dragger=$("div",{cls:"dragger"})
 	playBtn.onclick=function(){
 		media.play()
@@ -34,21 +35,19 @@ function PlayBox(){
 		modeBtn,
 		volumeBtn,
 		timeBar,
-		volumeBar
+		volumeBar,
+		mediaModeBtn
 	)
-	if(option.get("video")){
-		videoModeBtn=$("div",{cls:"videoModeBtn video"})
-		self.append(videoModeBtn)
-		videoModeBtn.onclick=function(){
-			if(videoModeBtn.hasClass("video")){
-				videoModeBtn.removeClass("video")
-			}else{
-				videoModeBtn.addClass("video")
-			}
-			var curIndex=media.index
-			media.stop()
-			media.switch(curIndex)
+	self.append()
+	mediaModeBtn.onclick=function(){
+		if(mediaModeBtn.hasClass("video")){
+			mediaModeBtn.removeClass("video")
+		}else{
+			mediaModeBtn.addClass("video")
 		}
+		var curIndex=media.index
+		media.stop()
+		media.switch(curIndex)
 	}
 	dragger.drag({
 		limit:{obj:wrap},

@@ -217,13 +217,11 @@ function ToolBar(){
     }
     fullScreenBtn.onclick=function(){
         if(!document.webkitIsFullScreen){
-            wrap.addClass("fullscreen")
             wrap.webkitRequestFullScreen();
             wrap.addClass("maximum")
         }else{
             document.webkitCancelFullScreen();
             wrap.removeClass("maximum")
-            wrap.removeClass("fullscreen")
         }
     }
     return self

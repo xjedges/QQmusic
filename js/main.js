@@ -52,11 +52,6 @@ option=Option({
         type:"cookie",
         value:false,
     },
-    video:{
-        name:"Video",
-        type:"checkbox",
-        value:true,
-    },
     playMode:{
         type:"cookie",
         value:"unorder",
@@ -105,9 +100,6 @@ function Wrap(){
     var self=$("div",{cls:"wrap"})
     var toolBar=ToolBar()
     self.append(toolBar)
-    var simplizeHandle
-    var tempMouseX=0
-    var tempMouseY=0
     function onresize(){
         if(playBox.top()+playBox.height()>=self.height()){
             playBox.top(self.height()-playBox.height())
@@ -121,23 +113,6 @@ function Wrap(){
             bottomTab.css({height:"-webkit-calc(100% - "+playBox.top()+"px)"})
             gallery.resize(playBox.top()+playBox.height(),playBox.top(),true)
             option.set("playBoxTop",playBox.top())
-        }
-    }
-    self.onmousemove=function(e){
-        if(document.webkitIsFullScreen && gallery.hasClass("video")){
-            if(Math.abs(e.pageX-tempMouseX)+Math.abs(e.pageY-tempMouseY)>20){
-                if(simplizeHandle)clearTimeout(simplizeHandle);
-                self.removeClass("simplize")
-                tempMouseX=e.pageX
-                tempMouseY=e.pageY
-                simplizeHandle=setTimeout(function(){
-                    if(document.webkitIsFullScreen && gallery.hasClass("video")){
-                        self.addClass("simplize")
-                    }
-                },2000)
-            }
-        }else{
-            self.removeClass("simplize")
         }
     }
     if(!windowState){
@@ -162,8 +137,6 @@ function Wrap(){
                 self.left(this.dragInfo.pos.x);
             },
             up:function(e){
-                self.top(this.dragInfo.pos.y);
-                self.left(this.dragInfo.pos.x);
                 self.removeClass("move")
                 option.set("X",this.dragInfo.pos.x)
                 option.set("Y",this.dragInfo.pos.y)
@@ -180,10 +153,8 @@ function Wrap(){
                 onresize()
             },
             up:function(){
-                self.width(this.dragInfo.pos.x)
-                self.height(this.dragInfo.pos.y)
-                option.set("W",this.dragInfo.pos.x)
-                option.set("H",this.dragInfo.pos.y)
+                option.set("W",Math.max(this.dragInfo.pos.x,400))
+                option.set("H",Math.max(this.dragInfo.pos.y,400*9/16))
                 onresizeEnd()
             }
         })

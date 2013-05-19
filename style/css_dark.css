@@ -510,7 +510,7 @@ body#ipad .wrap {
   background: url(../images/UI.png) no-repeat;
   background-position: -376 -66;
 }
-.playBox .videoModeBtn {
+.playBox .mediaModeBtn {
   margin-left: -96;
   margin-top: -11;
   width: 32;
@@ -521,7 +521,7 @@ body#ipad .wrap {
   font-size: 1rem;
   color: #4488ff;
 }
-.playBox .videoModeBtn:after {
+.playBox .mediaModeBtn:after {
   position: absolute;
   width: 100%;
   top: 0;
@@ -531,7 +531,7 @@ body#ipad .wrap {
   line-height: 22px;
   content: "AU";
 }
-.playBox .videoModeBtn.video:after {
+.playBox .mediaModeBtn.video:after {
   content: "MV";
 }
 .playBox .volumeBtn {
@@ -1312,6 +1312,9 @@ body#ipad .wrap {
   width: 100% !important;
   left: 0 !important;
   top: 0 !important;
+}
+.maximum .bottomTab {
+  height: 0!important;
 }
 .maximum .bottomTab .tabBar {
   display: none;

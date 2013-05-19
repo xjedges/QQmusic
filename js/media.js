@@ -57,7 +57,6 @@ function Media(){
 	addListener(video)
 	addListener(audio)
 	self.index=-1
-	
 	self.play=function(){
 		if(self.index==-1){
 			self.switch(option.get("curIndex"))
@@ -144,7 +143,7 @@ function Media(){
 		muted=value;
 	}
 	function load(data){
-		if(data.mv && videoModeBtn.hasClass("video")){
+		if(data.mv && mediaModeBtn.hasClass("video")){
 			video.src=data.mv
 			media=video
 		}else{
@@ -180,6 +179,7 @@ function Media(){
 			playBtn.removeClass("pause")
 			gallery.addClass("pause")
 			pageTitle.pause()
+			wrap.removeClass("simplize")
 		})
 		_media.addEventListener("error",function(){
 			if(state!="error"){
@@ -209,5 +209,31 @@ function Media(){
 			self.play()
 		}
 	}
+    document.addEventListener("webkitfullscreenchange",function(){
+        var simplizeHandle
+        var tempMouseX=0
+        var tempMouseY=0
+        if(document.webkitIsFullScreen){
+            document.addEventListener("mousemove",mouseMove)
+        }else{
+            document.removeEventListener(mouseMove);
+            wrap.removeClass("simplize")
+            playListBox.roll()
+            lyricBox.roll()
+        }
+        function mouseMove(e){
+            if(Math.abs(e.pageX-tempMouseX)+Math.abs(e.pageY-tempMouseY)>20){
+                if(simplizeHandle)clearTimeout(simplizeHandle);
+                wrap.removeClass("simplize")
+                tempMouseX=e.pageX
+                tempMouseY=e.pageY
+                simplizeHandle=setTimeout(function(){
+                    if(document.webkitIsFullScreen && gallery.hasClass("video") && state=="playing"){
+                        wrap.addClass("simplize")
+                    }
+                },2000)
+            }
+        }
+    })
 	return self
 }
