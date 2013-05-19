@@ -138,8 +138,8 @@ function CoverFlow(){
 				this.freeze=0;
 				this.init();
 				if(i==index)		{this.css({"-webkit-transform":"translateX(0) translateZ(0px) rotateY(0)"});}
-				else if(i==index-1)	{this.css({"-webkit-transform":"translateX(-"+180+"px) translateZ(-200px) rotateY(60deg)"})}
-				else if(i==index+1)	{this.css({"-webkit-transform":"translateX("+180+"px) translateZ(-200px) rotateY(-60deg)"})}
+				else if(i==index-1)	{this.css({"-webkit-transform":"translateX(-"+180+"px) translateZ(-200px) rotateY(55deg)"})}
+				else if(i==index+1)	{this.css({"-webkit-transform":"translateX("+180+"px) translateZ(-200px) rotateY(-55deg)"})}
 				else if(i<index)	{this.css({"-webkit-transform":"translateX(-"+((index-i)*75+110)+"px) translateZ(-280px) rotateY(45deg)"})}
 				else if(i>index)	{this.css({"-webkit-transform":"translateX("+((i-index)*75+110)+"px) translateZ(-280px) rotateY(-45deg)"})}
 			}
