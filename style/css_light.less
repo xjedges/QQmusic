@@ -30,7 +30,6 @@
 @red:#F79;
 
 @coverImage:"../images/cover.png";
-
 @coverSize:330;
 
 .transition(@attribute:all,@time:0.5,@effect:ease,@delay:0){
@@ -776,11 +775,13 @@ body{
 		}
 	}
 	.bottomTab{
+		pointer-events:none;
+		height:100% !important;
 		.tabBar{display:none;}
-		.playListBox{display:block !important;}
+		.playListBox{bottom:-webkit-calc(~"-100% + 6rem"); display:block !important;}
 		.searchListBox{display:none !important;}
 		.lyricBox{
-			height:80; bottom:550; display:block !important;
+			height:-webkit-calc(~"20%");; bottom:-webkit-calc(~"80%"); display:block !important;
 		}
 	}
 }

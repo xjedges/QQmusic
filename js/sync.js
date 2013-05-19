@@ -2,10 +2,6 @@
 function Sync(appName,key){
 	var action=[]
 	var base64 = new Base64();
-	// var localData=JSON.parse(window.localStorage.getItem("sync")) || {
-	// 	version:0,
-	// 	since:0,
-	// };
 	var param=(function(){
 		var account={
 			username:"xjedgeshotmail",
@@ -48,6 +44,7 @@ function Sync(appName,key){
 				})
 	        }else{
 	        	messageBox.alert("send package over")
+	        	window.open("http://getpocket.com/")
 	        }
         }
         if(dataPackage.length>0){
@@ -82,6 +79,7 @@ function Sync(appName,key){
 				)
 	        }else{
 	        	messageBox.alert("delet package over")
+	        	window.open("http://getpocket.com/")
 	        	callback()
 	        }
 		}
@@ -104,8 +102,6 @@ function Sync(appName,key){
 			    }
 			}
 		    callback(newData)
-		    	// newData,data:unpack(newData)
-		    
 		})
 	}
 	function pack(msg){

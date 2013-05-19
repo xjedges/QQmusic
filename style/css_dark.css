@@ -1264,18 +1264,23 @@ body#ipad .wrap {
 .maximumTop .gallery:after {
   display: block;
 }
+.maximumTop .bottomTab {
+  pointer-events: none;
+  height: 100% !important;
+}
 .maximumTop .bottomTab .tabBar {
   display: none;
 }
 .maximumTop .bottomTab .playListBox {
+  bottom: -webkit-calc(-100% + 6rem);
   display: block !important;
 }
 .maximumTop .bottomTab .searchListBox {
   display: none !important;
 }
 .maximumTop .bottomTab .lyricBox {
-  height: 80;
-  bottom: 550;
+  height: -webkit-calc(20%);
+  bottom: -webkit-calc(80%);
   display: block !important;
 }
 .maximum {
