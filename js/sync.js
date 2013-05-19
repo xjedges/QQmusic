@@ -19,28 +19,6 @@ function Sync(appName,key){
 		}
 		return param
 	})();
-	// this.sync=function(msg,callback){
-	// 	// this.getWebVersion(function(version){
-	// 	// 	DD(version)
-	// 	// })
-	// 	// this.setWebVersion(5)
-	// 	this.get(function(webData){
-	// 		// eval("var list="+data.data)
-	// 		if(webData.version>localData.version){
-	// 			localData.version=webData.version
-	// 			callback(webData.data)
-	// 			this.save()
-	// 		}else if(webData.version<localData.version){
-	// 			this.delete(webData.version,webData.packageNum,function(){
-	// 				callback(false)
-	// 				this.send(localData.version,msg)
-	// 			})
-	// 		}else{
-	// 			callback(false)
-	// 			DD("the same version")
-	// 		}
-	// 	})
-	// }
 	this.download=function(callback){
 		this.get(function(webData){
 			callback(unpack(webData))
@@ -53,9 +31,6 @@ function Sync(appName,key){
 			})
 		})
 	}
-	// this.save=function(){
-	// 	window.localStorage.setItem("sync",JSON.stringify(localData));
-	// }
 	this.send=function(msg){
 		var dataPackage=pack(msg)
 		var i=-1
@@ -64,15 +39,19 @@ function Sync(appName,key){
         	if(i<dataPackage.length){
 	        	var id=appName+"_"+i
 				GM_getData("https://readitlaterlist.com/v2/add?"+param+"url="+dataPackage[i]+"&title="+id,function(http){
-				    console.log("send "+id)
-				    send()
+					if(http.status==200){
+						messageBox.alert("sending package ( "+(i+1)+"/"+dataPackage.length+" ) ...")
+					    send()
+					}else{
+						alert("sending package ( "+(i+1)+"/"+dataPackage.length+" ) have error")
+					}
 				})
 	        }else{
-	        	console.log("send package["+dataPackage.length+"] over")
+	        	messageBox.alert("send package over")
 	        }
         }
         if(dataPackage.length>0){
-        	console.log("send package["+dataPackage.length+"] start")
+			messageBox.alert("send package start")
         	send();
         }
 		
@@ -80,10 +59,9 @@ function Sync(appName,key){
 	this.delete=function(webData,callback){
 		var i=-1
 		if(webData.length>0){
+			messageBox.alert("delete package start")
         	dataDelete()
-        	console.log("delete package["+webData.length+"] start")
         }else{
-        	console.log("delete package["+webData.length+"] over")
         	callback()
         }
 		function dataDelete(){
@@ -94,27 +72,20 @@ function Sync(appName,key){
 				GM_getData(
 					"https://readitlaterlist.com/v2/send?"+param+"read="+sender,
 					function(http){
-				    console.log("delete qqmusic_"+i)
-				    dataDelete()
-				})
+						if(http.status==200){
+							messageBox.alert("deleting package ( "+(i+1)+"/"+webData.length+" ) ...")
+				    		dataDelete()
+						}else{
+							alert("deleting package ( "+(i+1)+"/"+webData.length+" ) have error")
+						}
+					}
+				)
 	        }else{
-	        	console.log("delete package["+webData.length+"] over")
+	        	messageBox.alert("delet package over")
 	        	callback()
 	        }
 		}
-		// for(var i in webData){
-		// 	sender[i]={url:"http://"+webData[i]}
-		// }
-		// GM_getData("https://readitlaterlist.com/v2/send?"+param+"read="+JSON.stringify(sender),function(http){
-		//     callback()
-		// })
 	}
-	// this.stats=function(callback){
-	// 	GM_getData("https://readitlaterlist.com/v2/stats?"+param,function(http){
-	// 	    eval("var data="+http.responseText)
-	// 	    JJ(data)
-	// 	})
-	// }
 	this.get=function(callback){
 		GM_getData("https://readitlaterlist.com/v2/get?"+param+"myAppOnly=1&since=1360230926&state=unread",function(http){
 		    eval("var data="+http.responseText)
