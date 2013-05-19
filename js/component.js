@@ -188,7 +188,7 @@ function ToolBar(){
             window.open(
                 "http://127.0.0.1/~xiejun/QQmusic/pop.html",
                 "popup1",
-                "width="+wrap.width()+",height="+wrap.height()+",\
+                "width="+option.get("W")+",height="+option.get("H")+",\
                 scrollbars=1,\
                 left=0,top=0,\
                 screenX="+Math.round((window.screen.width-(wrap.width()+10))/2)+",\
@@ -208,22 +208,22 @@ function ToolBar(){
             bottomTab.css({height:wrap.height()-playBox.offsetTop})
             gallery.resize(playBox.offsetTop+playBox.height(),playBox.offsetTop,true)
             option.set("maximum",false)
-            lyricBox.setPos(0.4)
             video.update()
         }else{
             wrap.addClass("maximum")
             option.set("maximum",true)
-            lyricBox.setPos(0.1)
         }
         if(option.get("soundVisual"))soundVisual.resize();
     }
     fullScreenBtn.onclick=function(){
         if(!document.webkitIsFullScreen){
+            wrap.addClass("fullscreen")
             wrap.webkitRequestFullScreen();
             wrap.addClass("maximum")
         }else{
             document.webkitCancelFullScreen();
             wrap.removeClass("maximum")
+            wrap.removeClass("fullscreen")
         }
     }
     return self

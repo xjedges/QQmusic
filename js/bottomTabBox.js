@@ -27,7 +27,7 @@ function SearchListBox(){
 			lists.css({marginTop:endPos});
 
 			if(endPos>0 || endPos<-lists.height()+self.height()){
-				if(bounceTimout)clearTimeout(bounceTimout)
+				if(bounceTimout)clearTimeout(bounceTimout);
 				bounceTimout=setTimeout(function(){
 					if(lists.height()<self.height()){
 						endPos=playBox.height()
@@ -162,7 +162,7 @@ function PlayListBox(){
 	}
 	function backtoCur(){
 		if(lists.find(".cur")){
-		if(backTimeout)clearTimeout(backTimeout);
+			if(backTimeout)clearTimeout(backTimeout);
 			backTimeout=setTimeout(function(){
 				self.roll()
 			},3000)
@@ -431,12 +431,7 @@ function LyricBox(){
 	var backTimeout
 	var bounceTimout
 	var timeoffset=option.get("lyricTimeOffset")
-	var pos=0.4
 	self.append(lists)
-	self.setPos=function(value){
-		pos=value
-		self.roll()
-	}
 	self.getData=function(id){
 		self.clean()
 		api.getLyric(id,function(lyric){
@@ -488,7 +483,7 @@ function LyricBox(){
 		if(curLine){
 			
 			curLine.addClass("cur")
-			var endPos=-curLine.offsetTop+self.height()*pos
+			var endPos=-curLine.offsetTop+self.height()*0.4
 			lists.css({marginTop:endPos})
 		}
 
